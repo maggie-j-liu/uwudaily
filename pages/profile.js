@@ -12,7 +12,7 @@ const Profile = () => {
   }, [session, loading, router]);
   if (loading || !session) return null;
   return (
-    <div className="bg-gray-200 h-screen" style={{ padding: "50px 0 100px 0" }}>
+    <div className="bg-gray-200 h-screen pt-32 pb-16">
       <Account />
     </div>
   );

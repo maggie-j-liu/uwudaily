@@ -15,7 +15,7 @@ export default function Auth() {
     if (user) {
       router.replace("/profile");
     }
-  }, [user]);
+  }, [user, router]);
 
   const handleLogin = async (email) => {
     try {
