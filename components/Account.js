@@ -15,7 +15,7 @@ export default function Account() {
 
         let { data, error, status } = await supabase
           .from("profiles")
-          .select(`username`)
+          .select("username")
           .eq("id", user.id)
           .single();
 
@@ -25,8 +25,21 @@ export default function Account() {
         if (data) {
           setUsername(data.username);
         } else if (user.user_metadata.full_name) {
-          await updateProfile({ username: user.user_metadata.full_name });
-          setUsername(user.user_metadata.full_name);
+          const usernameFromName =
+            user.user_metadata.full_name +
+            Math.floor(Math.random() * (10000 - 1000) + 1000);
+          await updateProfile({
+            username: usernameFromName,
+          });
+          setUsername(usernameFromName);
+        } else {
+          const usernameFromEmail =
+            user.email.split("@")[0] +
+            Math.floor(Math.random() * (10000 - 1000) + 1000);
+          await updateProfile({
+            username: usernameFromEmail,
+          });
+          setUsername(usernameFromEmail);
         }
       } catch (error) {
         alert(error.message);
@@ -57,7 +70,8 @@ export default function Account() {
 
       let { error: authError } = await supabase.auth.update({
         data: {
-          full_name: username,
+          ...user.user_metadata,
+          username: username,
         },
       });
       if (authError) {

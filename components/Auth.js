@@ -1,17 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "../utils/supabaseClient";
 import Image from "next/image";
 import { FiGithub } from "react-icons/fi";
 import { FcGoogle } from "react-icons/fc";
+import useAuth from "utils/useAuth";
+import { useRouter } from "next/router";
 
 export default function Auth() {
+  const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
+  const router = useRouter();
+  useEffect(() => {
+    if (user) {
+      router.replace("/profile");
+    }
+  }, [user]);
 
   const handleLogin = async (email) => {
     try {
       setLoading(true);
-      const { error } = await supabase.auth.signIn({ email });
+      const { error } = await supabase.auth.signIn(
+        { email },
+        {
+          redirectTo: "http://localhost:3000/sign-in",
+        }
+      );
       if (error) throw error;
       alert("Check your email for the login link!");
     } catch (error) {
@@ -23,9 +37,14 @@ export default function Auth() {
   const signInWithProvider = async (provider) => {
     try {
       setLoading(true);
-      const { user, session, error } = await supabase.auth.signIn({
-        provider,
-      });
+      const { user, session, error } = await supabase.auth.signIn(
+        {
+          provider,
+        },
+        {
+          redirectTo: "http://localhost:3000/sign-in",
+        }
+      );
       if (error) throw error;
     } catch (error) {
       alert(error.error_description || error.message);
@@ -43,7 +62,7 @@ export default function Auth() {
         <p className="uppercase text-center text-2xl pb-6">
           Sign in to <br />
           <span className="text-blue-500 normal-case font-bold text-5xl">
-            Poll
+            Emoji
           </span>
         </p>
         <div className="w-80 mx-auto">
