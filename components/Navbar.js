@@ -19,6 +19,11 @@ const Navbar = () => {
           <Link href="/new">
             <a>Post</a>
           </Link>
+          {user && (
+            <Link href={`/log/${user.id}`}>
+              <a>My Log</a>
+            </Link>
+          )}
         </div>
         {!loading && (
           <div className="flex items-center gap-4 sm:gap-8">
