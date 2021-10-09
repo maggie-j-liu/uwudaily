@@ -16,6 +16,9 @@ const Navbar = () => {
               </span>
             </a>
           </Link>
+          <Link href="/new">
+            <a>Post</a>
+          </Link>
         </div>
         {!loading && (
           <div className="flex items-center gap-4 sm:gap-8">

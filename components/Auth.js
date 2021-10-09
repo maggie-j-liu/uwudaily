@@ -20,12 +20,7 @@ export default function Auth() {
   const handleLogin = async (email) => {
     try {
       setLoading(true);
-      const { error } = await supabase.auth.signIn(
-        { email },
-        {
-          redirectTo: "http://localhost:3000/sign-in",
-        }
-      );
+      const { error } = await supabase.auth.signIn({ email });
       if (error) throw error;
       alert("Check your email for the login link!");
     } catch (error) {
@@ -37,14 +32,9 @@ export default function Auth() {
   const signInWithProvider = async (provider) => {
     try {
       setLoading(true);
-      const { user, session, error } = await supabase.auth.signIn(
-        {
-          provider,
-        },
-        {
-          redirectTo: "http://localhost:3000/sign-in",
-        }
-      );
+      const { user, session, error } = await supabase.auth.signIn({
+        provider,
+      });
       if (error) throw error;
     } catch (error) {
       alert(error.error_description || error.message);

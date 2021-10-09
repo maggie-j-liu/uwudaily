@@ -1,10 +1,56 @@
 import formatDate from "utils/formatDate";
-import { Picker, Emoji } from "emoji-mart";
-import { useState } from "react";
+import { Emoji } from "emoji-mart";
+import React, { useEffect, useMemo, useState } from "react";
+import dynamic from "next/dynamic";
+import { supabase } from "utils/supabaseClient";
+import useAuth from "utils/useAuth";
+import { useRouter } from "next/router";
+
+const SimpleMdeReact = dynamic(() => import("react-simplemde-editor"), {
+  ssr: false,
+});
+const Picker = dynamic(() => import("emoji-mart").then((mod) => mod.Picker), {
+  ssr: false,
+});
 
 const AddNew = () => {
+  const { user, loading } = useAuth();
+  const router = useRouter();
   const [emoji, setEmoji] = useState(null);
+  const [description, setDescription] = useState("");
+  const options = useMemo(
+    () => ({
+      minHeight: "150px",
+    }),
+    []
+  );
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.replace("/");
+    }
+  }, [router, loading, user]);
+
   const formattedDate = formatDate(new Date());
+
+  const handleSubmit = async () => {
+    if (emoji === null) {
+      return;
+    }
+    await supabase.from("updates").insert(
+      [
+        {
+          emoji,
+          description: description ? description : null,
+          created_at: new Date(),
+          user_id: user.id,
+        },
+      ],
+      { returning: "minimal" }
+    );
+  };
+
+  if (loading) return null;
   return (
     <div className="min-h-screen bg-gray-200 pt-32 pb-16 px-8 sm:px-16">
       <main className="mx-auto max-w-5xl w-full">
@@ -34,21 +80,38 @@ const AddNew = () => {
           <div className="justify-self-stretch">
             <div className="bg-white px-8 py-10 rounded-xl shadow-xl">
               <div
-                className={`rounded-full h-28 w-28 mx-auto ${
-                  emoji === null ? " bg-white" : ""
+                className={`flex items-center justify-center rounded-full h-28 w-28 mx-auto ${
+                  emoji === null ? " bg-blue-100 border-blue-400 border-4" : ""
                 }`}
               >
-                {emoji !== null && <Emoji emoji={emoji} size={112} />}
+                {emoji !== null ? (
+                  <Emoji emoji={emoji} size={112} />
+                ) : (
+                  <div className="text-7xl text-blue-400">?</div>
+                )}
               </div>
               <p className="text-center text-xl font-semibold text-gray-600 mt-2">
                 {formattedDate}
               </p>
-              <label className="block mt-8">
-                <p className="text-lg text-gray-600">
-                  Optional: add a short description
-                </p>
-                <textarea className="w-full border-gray-400 rounded-md h-28" />
-              </label>
+              <p className="mt-8 text-lg text-gray-600">
+                Optional: add a short description
+              </p>
+              <div className="prose">
+                <SimpleMdeReact
+                  options={options}
+                  value={description}
+                  onChange={setDescription}
+                />
+              </div>
+            </div>
+            <div className="w-full flex justify-end">
+              <button
+                type="button"
+                className="mt-8 px-4 py-2 bg-blue-500 text-white text-lg font-semibold rounded-lg shadow-md hover:shadow-lg hover:bg-blue-600 hover:duration-75 duration-300"
+                onClick={() => handleSubmit()}
+              >
+                Submit
+              </button>
             </div>
           </div>
         </div>
