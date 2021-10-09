@@ -78,7 +78,11 @@ export default function Account() {
         throw authError;
       }
     } catch (error) {
-      alert(error.message);
+      if (error.code === "23505") {
+        alert("This username has already been taken.");
+      } else {
+        alert(error.message);
+      }
     } finally {
       setLoading(false);
     }

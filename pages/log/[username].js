@@ -35,7 +35,7 @@ export const getServerSideProps = async ({ params }) => {
   const { data: userInfo } = await supabase
     .from("profiles")
     .select("id, username")
-    .eq("id", params.id)
+    .eq("username", params.username)
     .single();
   if (userInfo == null) {
     return {
@@ -46,7 +46,7 @@ export const getServerSideProps = async ({ params }) => {
     .from("updates")
     .select("emoji, description, id, created_at")
     .order("created_at", { ascending: false })
-    .eq("user_id", params.id);
+    .eq("user_id", userInfo.id);
   return {
     props: {
       userInfo,
