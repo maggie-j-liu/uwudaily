@@ -1,25 +1,31 @@
 import Update from "components/Update";
 import { supabase } from "utils/supabaseClient";
 import formatDate from "utils/formatDate";
+import { EmojiProvider } from "utils/useEmoji";
+import EmojiAnimation from "components/EmojiAnimation";
 
 const Log = ({ userInfo, updates }) => {
   return (
-    <div className="bg-gray-200 min-h-screen pt-32 pb-16">
-      <main className="w-full px-8 sm:px-16 max-w-3xl mx-auto space-y-8">
-        {updates.map((update) => {
-          const date = formatDate(new Date(update.created_at));
-          return (
-            <Update
-              key={update.id}
-              username={userInfo.username}
-              description={update.description}
-              emoji={update.emoji}
-              date={date}
-            />
-          );
-        })}
-      </main>
-    </div>
+    <EmojiProvider>
+      <EmojiAnimation />
+      <div className="bg-gray-200 min-h-screen pt-32 pb-16">
+        <main className="w-full px-8 sm:px-16 max-w-3xl mx-auto space-y-8">
+          {updates.map((update) => {
+            const date = formatDate(new Date(update.created_at));
+            return (
+              <Update
+                key={update.id}
+                username={userInfo.username}
+                description={update.description}
+                emoji={update.emoji}
+                date={date}
+                id={update.id}
+              />
+            );
+          })}
+        </main>
+      </div>
+    </EmojiProvider>
   );
 };
 
