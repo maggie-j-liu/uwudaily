@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "emoji-mart/css/emoji-mart.css";
 import { AuthProvider } from "utils/useAuth";
 import Navbar from "components/Navbar";
 
