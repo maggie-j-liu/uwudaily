@@ -16,6 +16,7 @@ const Log = ({ userInfo, updates }) => {
               <Update
                 key={update.id}
                 username={userInfo.username}
+                userId={userInfo.id}
                 description={update.description}
                 emoji={update.emoji}
                 date={date}

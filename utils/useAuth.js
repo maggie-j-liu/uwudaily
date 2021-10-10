@@ -16,7 +16,6 @@ export const AuthProvider = ({ children }) => {
       setAuth({ ...initialState, loading: false });
     }
     return supabase.auth.onAuthStateChange(async (event, session) => {
-      console.log("event", event);
       if (session) {
         setAuth({ user: session.user, session, loading: false });
         if (

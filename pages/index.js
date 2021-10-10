@@ -1,25 +1,56 @@
-import useAuth from "utils/useAuth";
-import Link from "next/link";
+import Update from "components/Update";
 import { supabase } from "utils/supabaseClient";
+import formatDate from "utils/formatDate";
+import { EmojiProvider } from "utils/useEmoji";
+import EmojiAnimation from "components/EmojiAnimation";
 
-export default function Home() {
-  const { loading, user } = useAuth();
+const GlobalLog = ({ updates }) => {
   return (
-    <div className="bg-gray-200 min-h-screen pt-32 pb-16">
-      {loading ? null : user ? (
-        <button
-          className="px-4 py-2 bg-red-500 text-white font-semibold rounded-lg shadow-md focus-visible:outline-none"
-          onClick={() => supabase.auth.signOut()}
-        >
-          Sign Out
-        </button>
-      ) : (
-        <Link href="/sign-in">
-          <a className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md focus-visible:outline-none">
-            Sign In
-          </a>
-        </Link>
-      )}
-    </div>
+    <EmojiProvider>
+      <EmojiAnimation />
+      <div className="bg-gray-200 min-h-screen pt-32 pb-16">
+        <main className="w-full px-8 sm:px-16 max-w-3xl mx-auto space-y-8">
+          {updates.map((update) => {
+            const date = formatDate(new Date(update.created_at));
+            return (
+              <Update
+                key={update.id}
+                username={update.profiles.username}
+                userId={update.user_id}
+                description={update.description}
+                emoji={update.emoji}
+                date={date}
+                id={update.id}
+              />
+            );
+          })}
+        </main>
+      </div>
+    </EmojiProvider>
   );
-}
+};
+
+export default GlobalLog;
+
+export const getServerSideProps = async () => {
+  const { data: updates, error } = await supabase
+    .from("updates")
+    .select(
+      `
+      emoji,
+      description,
+      id,
+      created_at,
+      user_id,
+      profiles (
+        username
+      )
+    `
+    )
+    .order("created_at", { ascending: false });
+  return {
+    props: {
+      updates,
+    },
+  };
+};

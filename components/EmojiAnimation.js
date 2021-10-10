@@ -3,7 +3,6 @@ import AnimatedEmoji from "./AnimatedEmoji";
 import { useEffect } from "react";
 const EmojiAnimation = () => {
   const { emoji, setEmoji } = useEmoji();
-  console.log("useEmoji", emoji);
   useEffect(() => {
     if (emoji !== null) {
       const timer = setTimeout(() => {

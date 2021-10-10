@@ -5,6 +5,9 @@ import dynamic from "next/dynamic";
 import { supabase } from "utils/supabaseClient";
 import useAuth from "utils/useAuth";
 import { useRouter } from "next/router";
+import ReactDOMServer from "react-dom/server";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 const SimpleMdeReact = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
@@ -18,9 +21,15 @@ const AddNew = () => {
   const router = useRouter();
   const [emoji, setEmoji] = useState(null);
   const [description, setDescription] = useState("");
+  const [submitLoading, setSubmitLoading] = useState(false);
   const options = useMemo(
     () => ({
       minHeight: "150px",
+      previewRender: (plainText) => {
+        return ReactDOMServer.renderToString(
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{plainText}</ReactMarkdown>
+        );
+      },
     }),
     []
   );
@@ -37,6 +46,7 @@ const AddNew = () => {
     if (emoji === null) {
       return;
     }
+    setSubmitLoading(true);
     await supabase.from("updates").insert(
       [
         {
@@ -48,6 +58,9 @@ const AddNew = () => {
       ],
       { returning: "minimal" }
     );
+    setEmoji(null);
+    setDescription("");
+    setSubmitLoading(false);
   };
 
   if (loading) return null;
@@ -107,8 +120,9 @@ const AddNew = () => {
             <div className="w-full flex justify-end">
               <button
                 type="button"
-                className="mt-8 px-4 py-2 bg-blue-500 text-white text-lg font-semibold rounded-lg shadow-md hover:shadow-lg hover:bg-blue-600 hover:duration-75 duration-300"
+                className="mt-8 px-4 py-2 bg-blue-500 text-white text-lg font-semibold rounded-lg shadow-md hover:shadow-lg hover:bg-blue-600 hover:duration-75 duration-300 disabled:saturate-50 disabled:cursor-not-allowed"
                 onClick={() => handleSubmit()}
+                disabled={submitLoading || emoji === null}
               >
                 Submit
               </button>

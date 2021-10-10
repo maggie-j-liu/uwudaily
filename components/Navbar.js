@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { supabase } from "utils/supabaseClient";
 import useAuth from "utils/useAuth";
+import Avatar from "boring-avatars";
 const Navbar = () => {
   const { user, loading } = useAuth();
   return (
@@ -33,7 +34,10 @@ const Navbar = () => {
             {user ? (
               <div className="flex items-center space-x-2 sm:space-x-4">
                 <Link href="/profile">
-                  <a>{user.user_metadata.username}</a>
+                  <a className="flex items-center gap-2">
+                    <Avatar size={32} name={user.id} variant="beam" />
+                    {user.user_metadata.username}
+                  </a>
                 </Link>
                 <span className="text-xl">&bull;</span>
                 <button type="button" onClick={() => supabase.auth.signOut()}>
