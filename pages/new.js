@@ -10,6 +10,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import useEmoji from "utils/useEmoji";
 import EmojiAnimation from "components/EmojiAnimation";
+import UwU from "components/UwU";
 
 const SimpleMdeReact = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
@@ -73,7 +74,7 @@ const AddNew = () => {
     <div className="min-h-screen bg-gray-200 pt-32 pb-16 px-8 sm:px-16">
       <EmojiAnimation />
       <main className="mx-auto max-w-5xl w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div>
             <h1>
               <span className="block text-3xl uppercase font-medium text-gray-500">
@@ -90,9 +91,18 @@ const AddNew = () => {
             <p className="mt-4 text-2xl">Choose an emoji to get started.</p>
             <div className="mt-4">
               <Picker
-                emoji="heart"
-                title="Choose an emoji"
                 onSelect={setEmoji}
+                custom={[
+                  {
+                    name: "Party Parrot",
+                    short_names: ["party_parrot"],
+                    text: "",
+                    emoticons: [],
+                    imageUrl:
+                      "https://acegif.com/wp-content/uploads/2020/b72nv6/partyparrt-21.gif",
+                    keywords: ["party", "parrot"],
+                  },
+                ]}
               />
             </div>
           </div>
@@ -106,13 +116,15 @@ const AddNew = () => {
                 {emoji !== null ? (
                   <Emoji emoji={emoji} size={112} />
                 ) : (
-                  <div className="text-7xl text-blue-400">?</div>
+                  <div className="text-7xl text-blue-400">
+                    <UwU size={75} />
+                  </div>
                 )}
               </div>
               <p className="text-center text-xl font-semibold text-gray-600 mt-4">
                 {formattedDate}
               </p>
-              <div className="prose mt-4">
+              <div className="prose !max-w-none mt-4">
                 <SimpleMdeReact
                   options={options}
                   value={description}
@@ -132,8 +144,7 @@ const AddNew = () => {
         </div>
       </main>
       <style>
-        {
-          `
+        {`
           .emoji-mart{
             width: 100%!important;
             padding: 10px;
@@ -147,8 +158,7 @@ const AddNew = () => {
           .emoji-mart-bar{
             display: none;
           }
-          `
-        }
+          `}
       </style>
     </div>
   );
