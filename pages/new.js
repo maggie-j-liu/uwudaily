@@ -74,7 +74,7 @@ const AddNew = () => {
     <div className="min-h-screen bg-gray-200 pt-32 pb-16 px-8 sm:px-16">
       <EmojiAnimation />
       <main className="mx-auto max-w-5xl w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           <div>
             <h1>
               <span className="block text-3xl uppercase font-medium text-gray-500">
