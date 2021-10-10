@@ -25,6 +25,8 @@ const AddNew = () => {
   const options = useMemo(
     () => ({
       minHeight: "150px",
+      status: false,
+      placeholder: "Optional: add a short description",
       previewRender: (plainText) => {
         return ReactDOMServer.renderToString(
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{plainText}</ReactMarkdown>
@@ -77,12 +79,12 @@ const AddNew = () => {
                 {formattedDate}
               </span>{" "}
             </h1>
-            <h2 className="mt-8 text-4xl text-gray-800">
+            <h2 className="mt-4 text-4xl text-gray-800">
               How are <span className="text-blue-500 font-semibold">you</span>{" "}
               feeling today?
             </h2>
             <p className="mt-4 text-2xl">Choose an emoji to get started.</p>
-            <div className="mt-8">
+            <div className="mt-4">
               <Picker
                 emoji="heart"
                 title="Choose an emoji"
@@ -103,24 +105,19 @@ const AddNew = () => {
                   <div className="text-7xl text-blue-400">?</div>
                 )}
               </div>
-              <p className="text-center text-xl font-semibold text-gray-600 mt-2">
+              <p className="text-center text-xl font-semibold text-gray-600 mt-4">
                 {formattedDate}
               </p>
-              <p className="mt-8 text-lg text-gray-600">
-                Optional: add a short description
-              </p>
-              <div className="prose">
+              <div className="prose mt-4">
                 <SimpleMdeReact
                   options={options}
                   value={description}
                   onChange={setDescription}
                 />
               </div>
-            </div>
-            <div className="w-full flex justify-end">
               <button
                 type="button"
-                className="mt-8 px-4 py-2 bg-blue-500 text-white text-lg font-semibold rounded-lg shadow-md hover:shadow-lg hover:bg-blue-600 hover:duration-75 duration-300 disabled:saturate-50 disabled:cursor-not-allowed"
+                className="w-full mt-4 px-4 py-2 bg-blue-500 text-white text-lg font-semibold rounded-lg shadow-md hover:shadow-lg hover:bg-blue-600 hover:duration-75 duration-300 disabled:saturate-50 disabled:cursor-not-allowed"
                 onClick={() => handleSubmit()}
                 disabled={submitLoading || emoji === null}
               >
@@ -130,6 +127,25 @@ const AddNew = () => {
           </div>
         </div>
       </main>
+      <style>
+        {
+          `
+          .emoji-mart{
+            width: 100%!important;
+            padding: 10px;
+            border-radius: 0.75rem;
+            --tw-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+          }
+          .emoji-mart-anchor-icon > svg{
+            margin: auto;
+          }
+          .emoji-mart-bar{
+            display: none;
+          }
+          `
+        }
+      </style>
     </div>
   );
 };
