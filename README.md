@@ -1,34 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# uwudaily
 
-## Getting Started
+Built by [@maggie-j-liu](https://github.com/maggie-j-liu), [@sampoder](https://github.com/sampoder), and [@eilla1](https://github.com/eilla1).
 
-First, run the development server:
+### What is uwudaily?
 
-```bash
-npm run dev
-# or
+uwudaily™️ is a platform for anyone to log their daily ✨ vibes ✨. Built with Next.js, Tailwind CSS, and Supabase, users can create new posts to log their mood with an emoji along with a short description (with Markdown support)! Users can view the main uwudaily feed through the homepage and see a complete history of their own past posts in `/log/[username]`.
+
+### Running locally
+
+First, set environment variables for Supabase in `.env.local`
+
+```sh
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+```
+
+Then, run the development server:
+
+```sh
+# install dependencies
+yarn
+# then, run the dev server
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### How we used Supabase
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+We used Supabase for authentication and storing data. Users can authenticate with Magic Link or OAuth with GitHub or Google. uwudaily also stores user profile information in Supabase including username, timestamp of when the user's profile was last updated, and a UUID for each unique user. Each post (🤠) is also stored in a Supabase table. The user logs a new entry through the `/new` route which creates a record in the table with the user's UUID, timestamp, emoji, and description.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![uwu bear meme with pink heart emojis](https://cloud-lyylelcxu-hack-club-bot.vercel.app/0all-uwu-meme.jpg)
