@@ -16,7 +16,7 @@ const Log = ({ updates, userInfo, skeleton }) => {
         <main className="px-8">
           <div className="max-w-5xl mx-auto mb-4 flex justify-end items-center">
             <button
-              className={`z-10 px-4 py-2 rounded-l-md ${
+              className={`z-[5] px-4 py-2 rounded-l-md ${
                 dateSort ? "bg-blue-500 text-white" : "bg-white"
               }`}
               onClick={() => {
