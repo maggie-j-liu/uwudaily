@@ -229,6 +229,14 @@ const AddNew = () => {
                     imageUrl: "/emojis/yay.gif",
                     keywords: ["yay"],
                   },
+                  {
+                    name: "UwU",
+                    short_names: ["uwu"],
+                    text: "",
+                    emoticons: [],
+                    imageUrl: "/uwu.svg",
+                    keywords: ["uwu"],
+                  },
                 ]}
               />
             </div>
