@@ -1,12 +1,11 @@
 import Update from "components/Update";
 import { supabase } from "utils/supabaseClient";
 import formatDate from "utils/formatDate";
-import { EmojiProvider } from "utils/useEmoji";
 import EmojiAnimation from "components/EmojiAnimation";
 
 const Log = ({ userInfo, updates }) => {
   return (
-    <EmojiProvider>
+    <>
       <EmojiAnimation />
       <div className="bg-gray-200 min-h-screen pt-32 pb-16">
         <main className="w-full px-8 md:px-0 max-w-5xl mx-auto grid md:grid-cols-3 gap-8">
@@ -26,7 +25,7 @@ const Log = ({ userInfo, updates }) => {
           })}
         </main>
       </div>
-    </EmojiProvider>
+    </>
   );
 };
 

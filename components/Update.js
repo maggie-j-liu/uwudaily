@@ -4,8 +4,9 @@ import remarkGfm from "remark-gfm";
 import useEmoji from "utils/useEmoji";
 import Link from "next/link";
 import Avatar from "boring-avatars";
+import { FiLink } from "react-icons/fi";
 
-const Update = ({ username, userId, description, emoji, date }) => {
+const Update = ({ username, userId, description, emoji, date, id }) => {
   const { emoji: animatedEmoji, setEmoji: setAnimatedEmoji } = useEmoji();
   return (
     <div
@@ -16,7 +17,17 @@ const Update = ({ username, userId, description, emoji, date }) => {
         }
       }}
     >
-      <h2 className="text-2xl font-bold mb-5">{date}</h2>
+      <h2
+        className="text-2xl font-bold flex items-center gap-4 group w-max pt-28 -mt-28 mb-5"
+        id={id}
+      >
+        {date}
+        <Link href={`#${id}`}>
+          <a className="opacity-0 group-hover:opacity-100 focus-visible:opacity-100 hover:duration-100 duration-300">
+            <FiLink className="w-5 h-5" />
+          </a>
+        </Link>
+      </h2>
       <div className="mx-auto w-max">
         <Emoji emoji={emoji} size={112} />
       </div>
