@@ -44,10 +44,10 @@ Adding a new entry.
 
 ![image of adding a new entry](/assets/adding_new_entry.png)
 
-The global log, where you can see everyone's vibes.
+The global log, where users can see everyone's vibes.
 
 ![image of global log](/assets/global_log.png)
 
-Your personal log with your vibes.
+A personal log with a specific user's vibes.
 
 ![image of personal log](/assets/personal_log.png)
