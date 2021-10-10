@@ -16,7 +16,7 @@ const Log = ({ updates, userInfo, skeleton, who }) => {
         <main className="px-8">
           <div className="max-w-5xl mx-auto mb-6 flex items-center">
             <h1 className="text-2xl font-bold flex-grow">
-              <span class="bg-white text-blue-500 px-4 py-2 rounded-md">
+              <span className="bg-white text-blue-500 px-4 py-2 rounded-md">
                 {who.replace(who[0], who[0].toUpperCase())}'{who[who.length - 1].toLowerCase() != "s" ? 's' : ''} ✨ Vibes ✨
               </span>
             </h1>
