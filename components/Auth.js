@@ -52,7 +52,7 @@ export default function Auth() {
         <p className="uppercase text-center text-2xl pb-6">
           Sign in to <br />
           <span className="text-blue-500 normal-case font-bold text-5xl">
-            Emoji
+            UwU Daily
           </span>
         </p>
         <div className="w-80 mx-auto">
