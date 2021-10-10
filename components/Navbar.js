@@ -20,10 +20,10 @@ const Navbar = () => {
           {user && (
             <>
               <Link href="/new">
-                <a>Post</a>
+                <a>new entry</a>
               </Link>
               <Link href={`/log/${user.user_metadata.username}`}>
-                <a>My Log</a>
+                <a>my log</a>
               </Link>
             </>
           )}
@@ -40,12 +40,12 @@ const Navbar = () => {
                 </Link>
                 <span className="text-xl">&bull;</span>
                 <button type="button" onClick={() => supabase.auth.signOut()}>
-                  Sign Out
+                  sign out
                 </button>
               </div>
             ) : (
               <Link href="/sign-in">
-                <a>Sign In</a>
+                <a>sign in</a>
               </Link>
             )}
           </div>

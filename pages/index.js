@@ -24,6 +24,7 @@ const GlobalLog = ({ updates }) => {
                   emoji={update.emoji}
                   date={date}
                   id={update.id}
+                  upvotedBy={update.upvoted_by}
                 />
               );
             })}
@@ -46,6 +47,7 @@ export const getServerSideProps = async () => {
       id,
       created_at,
       user_id,
+      upvoted_by,
       profiles (
         username
       )

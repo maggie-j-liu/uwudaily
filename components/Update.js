@@ -5,18 +5,52 @@ import useEmoji from "utils/useEmoji";
 import Link from "next/link";
 import Avatar from "boring-avatars";
 import { FiLink } from "react-icons/fi";
+import UwU from "./UwU";
+import useAuth from "utils/useAuth";
+import { useEffect, useState } from "react";
+import { supabase } from "utils/supabaseClient";
+import router from "next/router";
 
-const Update = ({ username, userId, description, emoji, date, id }) => {
+const Update = ({
+  username,
+  userId,
+  description,
+  emoji,
+  date,
+  id,
+  upvotedBy,
+}) => {
+  const { user } = useAuth();
   const { emoji: animatedEmoji, setEmoji: setAnimatedEmoji } = useEmoji();
+  const [hasUpvoted, setHasUpvoted] = useState(
+    user && upvotedBy.includes(user.id)
+  );
+  const [upvotes, setUpvotes] = useState(upvotedBy.length);
+  useEffect(() => {
+    setHasUpvoted(user && upvotedBy.includes(user.id));
+  }, [user]);
+
+  const handleUpvote = async () => {
+    if (!user) return;
+    if (!hasUpvoted) {
+      setHasUpvoted(true);
+      setUpvotes((u) => u + 1);
+      await supabase
+        .from("updates")
+        .update({ upvoted_by: [...upvotedBy, user.id] })
+        .eq("id", id);
+    } else {
+      setHasUpvoted(false);
+      setUpvotes((u) => u - 1);
+      await supabase
+        .from("updates")
+        .update({ upvoted_by: upvotedBy.filter((x) => x !== user.id) })
+        .eq("id", id);
+    }
+  };
+
   return (
-    <div
-      className="bg-white rounded-lg shadow-xl px-8 py-8 text-center flex flex-col justify-between items-center"
-      onMouseEnter={() => {
-        if (!animatedEmoji) {
-          setAnimatedEmoji(emoji);
-        }
-      }}
-    >
+    <div className="relative bg-white rounded-lg shadow-xl px-8 pt-8 pb-12 text-center flex flex-col justify-between items-center">
       <h2
         className="mx-auto relative text-2xl font-bold flex items-center gap-4 group w-max pt-28 -mt-28 mb-5"
         id={id}
@@ -28,7 +62,14 @@ const Update = ({ username, userId, description, emoji, date, id }) => {
           </a>
         </Link>
       </h2>
-      <div className="mx-auto w-max">
+      <div
+        className="mx-auto w-max"
+        onMouseEnter={() => {
+          if (!animatedEmoji) {
+            setAnimatedEmoji(emoji);
+          }
+        }}
+      >
         <Emoji emoji={emoji} size={112} />
       </div>
       {description && (
@@ -47,6 +88,26 @@ const Update = ({ username, userId, description, emoji, date, id }) => {
           </a>
         </Link>
       </div>
+      {user ? (
+        <button
+          className={`absolute right-4 bottom-4 flex items-center gap-4 px-2 py-0.5 rounded-xl ${
+            hasUpvoted ? "bg-blue-100" : "bg-gray-100"
+          }`}
+          onClick={() => handleUpvote()}
+        >
+          {upvotes}
+          <UwU size={25} />
+        </button>
+      ) : (
+        <div
+          className={
+            "absolute right-4 bottom-4 flex items-center gap-4 px-2 py-0.5 rounded-xl bg-gray-100"
+          }
+        >
+          {upvotes}
+          <UwU size={25} />
+        </div>
+      )}
     </div>
   );
 };
