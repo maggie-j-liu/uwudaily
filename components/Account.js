@@ -114,9 +114,9 @@ export default function Account() {
         />
       </div>
 
-      <div className="flex items-center justify-between mt-8">
+      <div className="mt-6">
         <button
-          className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md focus:outline-none disabled:cursor-not-allowed disabled:saturate-50"
+          className="px-4 py-2 w-full bg-blue-500 text-white font-semibold rounded-lg shadow-md focus:outline-none disabled:cursor-not-allowed disabled:saturate-50"
           onClick={() => updateProfile({ username })}
           disabled={loading || !username || username.length < 3}
         >
@@ -124,7 +124,7 @@ export default function Account() {
         </button>
 
         <button
-          className="px-4 py-2 bg-red-500 text-white font-semibold rounded-lg shadow-md focus:outline-none"
+          className="px-4 py-2 mt-3 w-full bg-red-500 text-white font-semibold rounded-lg shadow-md focus:outline-none"
           onClick={() => supabase.auth.signOut()}
         >
           Sign Out
