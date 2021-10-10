@@ -35,7 +35,9 @@ const Navbar = () => {
                 <Link href="/profile">
                   <a className="flex items-center gap-2">
                     <Avatar size={32} name={user.id} variant="beam" />
-                    {user.user_metadata.username}
+                    <span className="hidden sm:block">
+                      {user.user_metadata.username}
+                    </span>
                   </a>
                 </Link>
                 <span className="text-xl">&bull;</span>
