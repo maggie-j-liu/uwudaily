@@ -12,6 +12,7 @@ const months = [
   "November",
   "December",
 ];
+
 export default function formatDate(date) {
   const month = months[date.getMonth()];
   const day = date.getDate();

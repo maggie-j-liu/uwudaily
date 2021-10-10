@@ -2,6 +2,7 @@ import Account from "components/Account";
 import useAuth from "utils/useAuth";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+
 const Profile = () => {
   const { session, loading } = useAuth();
   const router = useRouter();
