@@ -98,9 +98,16 @@ const AddNew = () => {
                     short_names: ["party_parrot"],
                     text: "",
                     emoticons: [],
-                    imageUrl:
-                      "https://acegif.com/wp-content/uploads/2020/b72nv6/partyparrt-21.gif",
+                    imageUrl: "/partyparrot.gif",
                     keywords: ["party", "parrot"],
+                  },
+                  {
+                    name: "Supabase",
+                    short_names: ["supabase"],
+                    text: "",
+                    emoticons: [],
+                    imageUrl: "/supabase.png",
+                    keywords: ["supabase"],
                   },
                 ]}
               />

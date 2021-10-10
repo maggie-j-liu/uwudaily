@@ -73,7 +73,7 @@ const Update = ({
         <Emoji emoji={emoji} size={112} />
       </div>
       {description && (
-        <div className="prose prose-blue">
+        <div className="prose">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>
             {description}
           </ReactMarkdown>
