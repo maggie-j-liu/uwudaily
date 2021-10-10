@@ -7,7 +7,7 @@ export default function Meta() {
     const darkSearchBarColor = "#000000"; // Safari 15 Search Bar Color in Dark Mode (optional)
     const keywords = "vibes, emoji, vercel";
     const url = "https://uwudaily.vercel.app"; 
-    const image = "/uwu.svg";
+    const image = "/ogimage.png";
     return (
         <Head>
             <meta charSet="utf-8" />
