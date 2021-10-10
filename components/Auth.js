@@ -69,7 +69,7 @@ export default function Auth() {
               e.preventDefault();
               handleLogin(email);
             }}
-            className="mt-4 px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md transform transition hover:scale-110 duration-300 focus-visible::outline-none"
+            className="w-full mt-4 px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md transform transition hover:scale-110 duration-300 focus-visible::outline-none"
             disabled={loading}
           >
             <span>{loading ? "Loading" : "Send magic link"}</span>
