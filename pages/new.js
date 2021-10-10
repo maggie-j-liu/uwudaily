@@ -8,6 +8,8 @@ import { useRouter } from "next/router";
 import ReactDOMServer from "react-dom/server";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import useEmoji from "utils/useEmoji";
+import EmojiAnimation from "components/EmojiAnimation";
 
 const SimpleMdeReact = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
@@ -17,6 +19,7 @@ const Picker = dynamic(() => import("emoji-mart").then((mod) => mod.Picker), {
 });
 
 const AddNew = () => {
+  const { setEmoji: setAnimatedEmoji } = useEmoji();
   const { user, loading } = useAuth();
   const router = useRouter();
   const [emoji, setEmoji] = useState(null);
@@ -47,25 +50,26 @@ const AddNew = () => {
       return;
     }
     setSubmitLoading(true);
-    await supabase.from("updates").insert(
-      [
-        {
-          emoji,
-          description: description ? description : null,
-          created_at: new Date(),
-          user_id: user.id,
-        },
-      ],
-      { returning: "minimal" }
-    );
-    setEmoji(null);
-    setDescription("");
-    setSubmitLoading(false);
+    const { data } = await supabase.from("updates").insert([
+      {
+        emoji,
+        description: description ? description : null,
+        created_at: new Date(),
+        user_id: user.id,
+      },
+    ]);
+    const id = data[0].id;
+    setAnimatedEmoji(emoji);
+    setTimeout(() => {
+      router.push(`/log/${user.user_metadata.username}#${id}`);
+      setSubmitLoading(false);
+    }, 2000);
   };
 
   if (loading) return null;
   return (
     <div className="min-h-screen bg-gray-200 pt-32 pb-16 px-8 sm:px-16">
+      <EmojiAnimation />
       <main className="mx-auto max-w-5xl w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div>

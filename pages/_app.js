@@ -3,12 +3,15 @@ import "emoji-mart/css/emoji-mart.css";
 import "easymde/dist/easymde.min.css";
 import { AuthProvider } from "utils/useAuth";
 import Navbar from "components/Navbar";
+import { EmojiProvider } from "utils/useEmoji";
 
 function MyApp({ Component, pageProps }) {
   return (
     <AuthProvider>
-      <Navbar />
-      <Component {...pageProps} />
+      <EmojiProvider>
+        <Navbar />
+        <Component {...pageProps} />
+      </EmojiProvider>
     </AuthProvider>
   );
 }
