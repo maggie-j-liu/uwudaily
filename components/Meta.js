@@ -2,7 +2,7 @@ import Head from "next/head"
 
 export default function Meta() {
     const title = "uwudaily ✨";
-    const description = "The micro-blogging platform for emoji enthusiasts.";
+    const description = "The microblogging platform for emoji enthusiasts.";
     const searchBarColor = "#ADD8E6"; // Safari 15 Search Bar Color in Light Mode
     const darkSearchBarColor = "#000000"; // Safari 15 Search Bar Color in Dark Mode (optional)
     const keywords = "vibes, emoji, vercel";
