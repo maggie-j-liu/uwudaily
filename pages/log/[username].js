@@ -1,42 +1,19 @@
-import Update from "components/Update";
 import { supabase } from "utils/supabaseClient";
-import formatDate from "utils/formatDate";
-import EmojiAnimation from "components/EmojiAnimation";
-import UpdateSkeleton from "components/UpdateSkeleton";
 import useAuth from "utils/useAuth";
+import Log from "components/Log";
 
-const Log = ({ userInfo, updates }) => {
+const LogPage = ({ userInfo, updates }) => {
   const { user } = useAuth();
   return (
-    <>
-      <EmojiAnimation />
-      <div className="bg-gray-200 min-h-screen pt-32 pb-16">
-        <main className="px-8">
-          <div className="w-full max-w-5xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {user && user.id === userInfo.id && <UpdateSkeleton />}
-            {updates.map((update) => {
-              const date = formatDate(new Date(update.created_at));
-              return (
-                <Update
-                  key={update.id}
-                  username={userInfo.username}
-                  userId={userInfo.id}
-                  description={update.description}
-                  emoji={update.emoji}
-                  date={date}
-                  id={update.id}
-                  upvotedBy={update.upvoted_by}
-                />
-              );
-            })}
-          </div>
-        </main>
-      </div>
-    </>
+    <Log
+      userInfo={userInfo}
+      updates={updates}
+      skeleton={user && user.id === userInfo.id}
+    />
   );
 };
 
-export default Log;
+export default LogPage;
 
 export const getServerSideProps = async ({ params }) => {
   const { data: userInfo } = await supabase
