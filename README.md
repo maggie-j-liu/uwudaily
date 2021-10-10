@@ -30,4 +30,4 @@ Open http://localhost:3000 with your browser to see the result.
 
 We used Supabase for authentication and storing data. Users can authenticate with Magic Link or OAuth with GitHub or Google. uwudaily also stores user profile information in Supabase including username, timestamp of when the user's profile was last updated, and a UUID for each unique user. Each post (🤠) is also stored in a Supabase table. The user logs a new entry through the `/new` route which creates a record in the table with the user's UUID, timestamp, emoji, and description.
 
-![uwu bear meme with pink heart emojis](https://cloud-lyylelcxu-hack-club-bot.vercel.app/0all-uwu-meme.jpg)
+![uwu bear meme with pink heart emojis](https://user-images.githubusercontent.com/72365100/136679198-bb72db44-129d-4980-851e-a57bcd1d5553.jpg)
