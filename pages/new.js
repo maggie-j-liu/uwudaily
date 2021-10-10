@@ -154,7 +154,7 @@ const AddNew = () => {
                     short_names: ["hack"],
                     text: "",
                     emoticons: [],
-                    imageUrl: "/emojis/hack.png",
+                    imageUrl: "/emojis/hack.gif",
                     keywords: ["hack", "cat", "typing"],
                   },
                   {
