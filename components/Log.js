@@ -28,7 +28,7 @@ const Log = ({ updates, userInfo, skeleton }) => {
               Sort by Date
             </button>
             <button
-              className={`z-10 px-4 py-2 rounded-r-md ${
+              className={`z-[5] px-4 py-2 rounded-r-md ${
                 !dateSort ? "bg-blue-500 text-white" : "bg-white"
               }`}
               onClick={() => {
