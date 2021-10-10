@@ -9,6 +9,7 @@ const LogPage = ({ userInfo, updates }) => {
       userInfo={userInfo}
       updates={updates}
       skeleton={user && user.id === userInfo.id}
+      who={userInfo.username}
     />
   );
 };

@@ -4,7 +4,7 @@ import EmojiAnimation from "components/EmojiAnimation";
 import UpdateSkeleton from "components/UpdateSkeleton";
 import { useState } from "react";
 import { sortByDate, sortByUpvotes } from "utils/sorting";
-const Log = ({ updates, userInfo, skeleton }) => {
+const Log = ({ updates, userInfo, skeleton, who }) => {
   const [updatesInOrder, setUpdatesInOrder] = useState(updates);
   const [dateSort, setDateSort] = useState(true);
   const updatesSortedByDate = sortByDate(updates);
@@ -12,9 +12,14 @@ const Log = ({ updates, userInfo, skeleton }) => {
   return (
     <>
       <EmojiAnimation />
-      <div className="bg-gray-200 min-h-screen pt-32 pb-16">
+      <div className="bg-gray-200 min-h-screen pt-24 pb-16">
         <main className="px-8">
-          <div className="max-w-5xl mx-auto mb-4 flex justify-end items-center">
+          <div className="max-w-5xl mx-auto mb-6 flex items-center">
+            <h1 className="text-2xl font-bold flex-grow">
+              <span class="bg-white text-blue-500 px-4 py-2 rounded-md">
+                {who.replace(who[0], who[0].toUpperCase())}'{who[who.length - 1].toLowerCase() != "s" ? 's' : ''} ✨ Vibes ✨
+              </span>
+            </h1>
             <button
               className={`z-[5] px-4 py-2 rounded-l-md ${
                 dateSort ? "bg-blue-500 text-white" : "bg-white"

@@ -2,7 +2,7 @@ import { supabase } from "utils/supabaseClient";
 import Log from "components/Log";
 
 const GlobalLog = ({ updates }) => {
-  return <Log updates={updates} skeleton />;
+  return <Log updates={updates} skeleton who="Everyone" />;
 };
 
 export default GlobalLog;
