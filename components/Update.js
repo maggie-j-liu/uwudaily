@@ -9,14 +9,14 @@ const Update = ({ username, userId, description, emoji, date }) => {
   const { emoji: animatedEmoji, setEmoji: setAnimatedEmoji } = useEmoji();
   return (
     <div
-      className="bg-white rounded-lg shadow-xl px-8 py-8"
+      className="bg-white rounded-lg shadow-xl px-8 py-8 text-center"
       onMouseEnter={() => {
         if (!animatedEmoji) {
           setAnimatedEmoji(emoji);
         }
       }}
     >
-      <h2 className="text-2xl font-bold">{date}</h2>
+      <h2 className="text-2xl font-bold mb-5">{date}</h2>
       <div className="mx-auto w-max">
         <Emoji emoji={emoji} size={112} />
       </div>
@@ -28,7 +28,7 @@ const Update = ({ username, userId, description, emoji, date }) => {
         </div>
       )}
 
-      <div className="flex justify-end">
+      <div className="flex justify-center">
         <Link href={`/log/${username}`}>
           <a className="flex items-center gap-2 mt-4 text-lg text-blue-500 font-medium hover:underline">
             <Avatar size={42} name={userId} variant="beam" />

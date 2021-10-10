@@ -8,8 +8,8 @@ const GlobalLog = ({ updates }) => {
   return (
     <EmojiProvider>
       <EmojiAnimation />
-      <div className="bg-gray-200 min-h-screen pt-32 pb-16">
-        <main className="w-full px-8 sm:px-16 max-w-3xl mx-auto space-y-8">
+      <div className="bg-gray-200 min-h-screen pt-24 pb-16">
+        <main className="w-full px-8 md:px-0 max-w-5xl mx-auto grid md:grid-cols-3 gap-8">
           {updates.map((update) => {
             const date = formatDate(new Date(update.created_at));
             return (
