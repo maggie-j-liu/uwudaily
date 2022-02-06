@@ -4,7 +4,7 @@
 
 See the website at [uwudaily.vercel.app](https://uwudaily.vercel.app).
 
-Built by [@maggie-j-liu](https://github.com/maggie-j-liu), [@sampoder](https://github.com/sampoder), and [@eilla1](https://github.com/eilla1).
+Built by [@maggie-j-liu](https://github.com/maggie-j-liu), [@sampoder](https://github.com/sampoder), and [@exu3](https://github.com/exu3).
 
 ## What is uwudaily?
 
